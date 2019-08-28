@@ -9,7 +9,7 @@ window.ToDoList = {
         var item = {
             description: description,
             deadline: deadline
-        }
+        };
 
         $.ajax({
             url: ToDoList.API_BASE_URL,
@@ -21,6 +21,16 @@ window.ToDoList = {
             console.log("Successfully received response")
             console.log(response);
         })
+    },
 
+    bindEvents: function () {
+
+        $('#new-item-form').submit(function (event) {
+            event.preventDefault();
+
+            ToDoList.createItem();
+        });
     }
-}
+};
+
+ToDoList.bindEvents();
