@@ -66,10 +66,15 @@ window.ToDoList = {
     getItemRow: function (item) {
         var formattedDate = new Date(...item.deadline).toLocaleDateString("en-US");
 
+        // ternary operator
+        var checkedAttribute = item.done ? "checked" : "";
+
         return `<tr>
                 <td>${item.description}</td>
                 <td>${formattedDate}</td>
-                <td><input type="checkbox" class="mark-done-checkbox" title="Completed" data-id="${item.id}"/></td>
+                <td><input type="checkbox" class="mark-done-checkbox" 
+                title="Completed" data-id="${item.id}" ${checkedAttribute}/></td>
+                
                 <td><a href="#" class="delete-item fa fa-trash" data-id="${item.id}"></a></td>
             </tr>`
     },
@@ -92,7 +97,8 @@ window.ToDoList = {
             ToDoList.deleteItem(itemId);
         });
 
-        $('#to-do-items-table').delegate('.mark-done-checkbox', 'change', function (event) {
+        $('#to-do-items-table').delegate('.mark-done-checkbox', 'change',
+            function (event) {
             event.preventDefault();
 
             var itemId = $(this).data('id');
